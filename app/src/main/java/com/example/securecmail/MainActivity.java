@@ -35,4 +35,13 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this,ContactActivity.class);
         startActivity(intent);
     }//end toContacts
+
+    /**
+     * Sends the user to the ContactActivity
+     * @param view The button to go to Message
+     */
+    public void toMessage(View view) {
+        Intent intent = new Intent(this,MessageActivity.class);
+        startActivity(intent);
+    }//end toMessage
 }

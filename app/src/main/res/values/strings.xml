@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">SecureCMail</string>
+    <string name="securecmail_title">SecureCMail 2023</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="enter_your_email1">Enter Your First Email ID</string>
+    <string name="enter_your_email2">Enter Your Second Email ID</string>
+    <string name="configure_text">Configure</string>
+    <string name="back">Back</string>
+    <string name="email_hint">example123@example.com</string>
+    <string name="contact_unique_name">Contact Unique Name</string>
+    <string name="enter_contacts_full_name">Enter Contacts Full Name</string>
+    <string name="enter_contact_email_id1">Enter Contact\'s First Email ID</string>
+    <string name="enter_contact_email_id2">Enter Contact\'s Second Email ID</string>
+    <string name="save">Save</string>
+</resources>

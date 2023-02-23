@@ -26,6 +26,11 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    packagingOptions {
+        resources {
+            pickFirsts += ['META-INF/LICENSE.md', 'META-INF/NOTICE.md']
+        }
+    }
 }
 
 dependencies {
@@ -36,4 +41,10 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    //angus mail dependencies:
+    implementation 'org.eclipse.angus:angus-mail:2.0.1'
+    implementation 'org.eclipse.angus:angus-activation:2.0.0'
+    implementation 'jakarta.activation:jakarta.activation-api:2.1.1'
+    implementation 'jakarta.mail:jakarta.mail-api:2.1.1'
+
 }

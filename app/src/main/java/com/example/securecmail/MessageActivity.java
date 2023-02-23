@@ -27,7 +27,6 @@ public class MessageActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String msg_subject = input_subject.toString();
                 String msg_body = input_body.toString();
-                System.out.println("Entering Send Message Method...");
                 MailHelper mailHelper = new MailHelper();
                 String user = "";
                 String pass = "";

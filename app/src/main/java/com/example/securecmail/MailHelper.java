@@ -70,8 +70,8 @@ public class MailHelper {
                 String host = resolveHostToIPV4(hostInput);
 
                 boolean sessionDebug = true;
-                String to = "sean.hot5@gmail.com";
-                String from = "sean.hot5@gmail.com";
+                String to = "";
+                String from = "";
                 String subject = "SecureCMail";
                 String messageText = "Share 1";
 

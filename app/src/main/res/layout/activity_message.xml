@@ -18,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Spinner
-        android:id="@+id/contact_spinner2"
+        android:id="@+id/contact_spinner"
         android:layout_width="377dp"
         android:layout_height="55dp"
         android:layout_marginTop="44dp"
@@ -36,16 +36,16 @@
         android:text="@string/cc_text"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/contact_spinner2" />
+        app:layout_constraintTop_toBottomOf="@+id/contact_spinner" />
 
     <Spinner
-        android:id="@+id/spinner2"
+        android:id="@+id/cc_spinner"
         android:layout_width="377dp"
         android:layout_height="55dp"
         android:layout_marginTop="12dp"
         android:contentDescription="@string/cc_description"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/contact_spinner2" />
+        app:layout_constraintTop_toBottomOf="@+id/contact_spinner" />
 
     <Button
         android:id="@+id/back_button"
@@ -69,7 +69,7 @@
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner2" />
+        app:layout_constraintTop_toBottomOf="@+id/cc_spinner" />
 
     <EditText
         android:id="@+id/input_body"

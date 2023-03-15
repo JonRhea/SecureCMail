@@ -40,10 +40,10 @@ public class ContactActivity extends AppCompatActivity {
         contactEmail2 = findViewById(R.id.input_email2);
 
         //temporarily deleting contact_info.txt every run for testing
-        File filePath = new File(ContactActivity.this.getFilesDir(), "securecmail_data");
-        if(filePath.exists()){
-            deleteFile("contact_info.txt");
-        }//end if
+        //File filePath = new File(ContactActivity.this.getFilesDir(), "securecmail_data");
+        //if(filePath.exists()){
+            //deleteFile("contact_info.txt");
+        //}//end if
 
     }
 

@@ -25,13 +25,13 @@ public class MessageActivity extends AppCompatActivity {
         send_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String msg_subject = input_subject.toString();
-                String msg_body = input_body.toString();
+                String msg_subject = input_subject.getText().toString();
+                String msg_body = input_body.getText().toString();
                 MailHelper mailHelper = new MailHelper();
                 String user = "";
                 String pass = "";
                 String host = "smtp.gmail.com";
-                mailHelper.sendMail(host, user, pass);
+                mailHelper.sendMail(host, user, pass, msg_subject, msg_body);
             }
         });
 

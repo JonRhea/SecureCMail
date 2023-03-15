@@ -63,7 +63,7 @@ public class MailHelper {
         }.start();
     }
 
-    public void sendMail(String hostInput, String user, String pass){
+    public void sendMail(String hostInput, String user, String pass, String msg_subject, String msg_body){
         new Thread(){
             public void run() {
 
@@ -72,8 +72,8 @@ public class MailHelper {
                 boolean sessionDebug = true;
                 String to = "";
                 String from = "";
-                String subject = "SecureCMail";
-                String messageText = "Share 1";
+                String subject = msg_subject;
+                String messageText = msg_body;
 
                 Properties props = System.getProperties();
                 //props.put("mail.smtp.ehlo", "false");

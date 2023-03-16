@@ -3,20 +3,15 @@ package com.example.securecmail;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Message;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.material.navigation.NavigationBarView;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -38,6 +33,8 @@ public class MessageActivity extends AppCompatActivity {
     ArrayList<Contact> contactList = new ArrayList<Contact>();
     ArrayList<String> contactNames = new ArrayList<String>();
 
+    Contact emptyContact = new Contact(null,null,null,null);
+
     Contact to_contact;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +47,8 @@ public class MessageActivity extends AppCompatActivity {
         to_spinner = findViewById(R.id.contact_spinner);
         cc_spinner = findViewById(R.id.cc_spinner);
 
+        contactList.add(emptyContact);
+        contactNames.add("None");
         loadContacts();
 
         ArrayAdapter contactAdapter = new ArrayAdapter(this, R.layout.spinner, contactNames);
@@ -58,24 +57,64 @@ public class MessageActivity extends AppCompatActivity {
         to_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
 
             @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                //((TextView) parent.getChildAt(0)).setTextColor(Color.BLACK);
+
+                Object contactUnique = parent.getSelectedItem().toString();
+
+                if (contactUnique == "None") {
+                    System.out.println("No contact selected\n");
+                }//end if
+                else {
+                    for (int i = 0; i < contactList.size(); i++) {
+                        if (contactList.get(i).getUniqueName() == contactUnique) {
+                            to_contact = contactList.get(i);
+                        }//end if
+                    }//end for
+
+                //test prints
+                    System.out.println(to_contact.getUniqueName());
+                    System.out.println(to_contact.getFullName());
+                    System.out.println(to_contact.getFirstEmailID());
+                    System.out.println(to_contact.getSecondEmailID());
+                    System.out.println("\n");
+                }//end else
+        }//end onItemSelected
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }//end onNothingSelected
+        });
+
+        cc_spinner.setAdapter(contactAdapter);
+        cc_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
+
+            @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id){
 
                 //((TextView) parent.getChildAt(0)).setTextColor(Color.BLACK);
 
                 Object contactUnique = parent.getSelectedItem().toString();
 
-                for(int i = 0; i < contactList.size(); i++){
-                    if(contactList.get(i).getUniqueName() == contactUnique){
-                        to_contact = contactList.get(i);
-                    }//end if
-                }//end for
+                if (contactUnique == "None") {
+                    System.out.println("No contact selected\n");
+                }//end if
+                else {
+                    for (int i = 0; i < contactList.size(); i++) {
+                        if (contactList.get(i).getUniqueName() == contactUnique) {
+                            to_contact = contactList.get(i);
+                        }//end if
+                    }//end for
 
-                //test prints
-                System.out.println(to_contact.getUniqueName());
-                System.out.println(to_contact.getFullName());
-                System.out.println(to_contact.getFirstEmailID());
-                System.out.println(to_contact.getSecondEmailID());
-                System.out.println("\n");
+                    //test prints
+                    System.out.println(to_contact.getUniqueName());
+                    System.out.println(to_contact.getFullName());
+                    System.out.println(to_contact.getFirstEmailID());
+                    System.out.println(to_contact.getSecondEmailID());
+                    System.out.println("\n");
+                }//end else
 
             }//end onItemSelected
 
@@ -94,7 +133,13 @@ public class MessageActivity extends AppCompatActivity {
                 String user = "";
                 String pass = "";
                 String host = "smtp.gmail.com";
-                mailHelper.sendMail(host, user, pass, msg_subject, msg_body);
+                if(to_contact != null) {
+                    mailHelper.sendMail(host, user, pass, msg_subject, msg_body, to_contact);
+                }//end if
+                else {
+                    System.out.println("Error, no recipient selected.\n");
+                    Toast.makeText(getApplicationContext(), "Error, no recipient selected.", Toast.LENGTH_LONG).show();
+                }//end else
             }
         });
 
@@ -116,7 +161,6 @@ public class MessageActivity extends AppCompatActivity {
 
     public void loadContacts(){
 
-        String contactString = "";
         File filePath = new File(MessageActivity.this.getFilesDir(), "securecmail_data");
         if(!filePath.exists()){
             filePath.mkdir();

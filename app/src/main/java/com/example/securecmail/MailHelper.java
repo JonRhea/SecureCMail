@@ -63,15 +63,15 @@ public class MailHelper {
         }.start();
     }
 
-    public void sendMail(String hostInput, String user, String pass, String msg_subject, String msg_body){
+    public void sendMail(String hostInput, String user, String pass, String msg_subject, String msg_body, Contact to_contact){
         new Thread(){
             public void run() {
 
                 String host = resolveHostToIPV4(hostInput);
 
                 boolean sessionDebug = true;
-                String to = "";
-                String from = "";
+                String to = to_contact.getFirstEmailID();
+                String from = ""; //user's email ids will go here
                 String subject = msg_subject;
                 String messageText = msg_body;
 

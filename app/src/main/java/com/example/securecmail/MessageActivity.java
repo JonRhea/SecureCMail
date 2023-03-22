@@ -204,7 +204,7 @@ public class MessageActivity extends AppCompatActivity {
      * @param view The button to go back
      */
     public void Back(View view) {
-        Intent intent = new Intent(this,MainActivity.class);
+        Intent intent = new Intent(this,HomeActivity.class);
         startActivity(intent);
 
     }//end Back

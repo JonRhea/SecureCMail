@@ -26,4 +26,7 @@
     <string name="login_text">Login</string>
     <string name="username_text">Username</string>
     <string name="password_text">Password</string>
+    <string name="create_account_text">Create Account</string>
+    <string name="confirm_username_text">Confirm Username</string>
+    <string name="confirm_password_text">Confirm Password</string>
 </resources>

@@ -15,6 +15,9 @@
         android:theme="@style/Theme.SecureCMail"
         tools:targetApi="31">
         <activity
+            android:name=".CreateAccountActivity"
+            android:exported="false" />
+        <activity
             android:name=".HomeActivity"
             android:exported="false" />
         <activity

@@ -189,11 +189,11 @@ public class MessageActivity extends AppCompatActivity {
             inputStream.close();
         }//end try
         catch(FileNotFoundException e){
-            //add toast later
+            Toast.makeText(this, "Error: File Not Found",Toast.LENGTH_LONG).show();
             System.out.printf("Error: File Not Found");
         }//end catch
         catch (IOException e) {
-            //add toast later
+            Toast.makeText(this, "Error: IOException Thrown",Toast.LENGTH_LONG).show();
             System.out.printf("Error: IOException Thrown");
         }//end catch
 

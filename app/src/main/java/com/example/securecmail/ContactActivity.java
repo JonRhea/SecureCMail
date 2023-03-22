@@ -73,17 +73,17 @@ public class ContactActivity extends AppCompatActivity {
 
                 System.out.println("New Contact was saved successfully!");
                 readContactTest();
-            }
+            }//end try
             catch(FileNotFoundException e){
-                //add toast later
+                Toast.makeText(this, "Error: File Not Found",Toast.LENGTH_LONG).show();
                 e.printStackTrace();
                 System.out.printf("Error: File Not Found");
             }//end catch
             catch (IOException e) {
-                //add toast later
+                Toast.makeText(this, "Error: IOException Thrown",Toast.LENGTH_LONG).show();
                 e.printStackTrace();
                 System.out.printf("Error: IOException Thrown");
-            }
+            }//end catch
         }//end if
         else{
             Toast.makeText(this, "Error: Contact information was missing.",Toast.LENGTH_LONG).show();

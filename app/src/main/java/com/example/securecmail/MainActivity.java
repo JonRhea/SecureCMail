@@ -61,9 +61,6 @@ public class MainActivity extends AppCompatActivity {
             while(bufferedReader.ready()){
                 data = bufferedReader.readLine();
                 userInfo = data.split(",");
-
-                System.out.println(userInfo[0]);
-                System.out.println(userInfo[1]);
             }//end while
 
             if(userInfo[0] != null){
@@ -73,7 +70,6 @@ public class MainActivity extends AppCompatActivity {
             inputStream.close();
         }//end try
         catch(FileNotFoundException e){
-            Toast.makeText(this, "Error: File Not Found",Toast.LENGTH_LONG).show();
             System.out.printf("Error: File Not Found");
         }//end catch
         catch (IOException e) {

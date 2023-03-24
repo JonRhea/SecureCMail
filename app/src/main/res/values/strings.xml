@@ -3,8 +3,8 @@
     <string name="securecmail_title">SecureCMail 2023</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="enter_your_email1">Enter Your First Email ID</string>
-    <string name="enter_your_email2">Enter Your Second Email ID</string>
+    <string name="enter_your_email1">Enter Your First Email ID and Password</string>
+    <string name="enter_your_email2">Enter Your Second Email ID and Password</string>
     <string name="configure_text">Configure</string>
     <string name="back">Back</string>
     <string name="email_hint">example123@example.com</string>

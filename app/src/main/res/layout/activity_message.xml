@@ -4,102 +4,195 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#e6dcd1"
     tools:context=".MessageActivity">
+
+    <TextView
+        android:id="@+id/cc_text3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/gilda_display"
+        android:text="@string/email_body_text"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/input_subject" />
+
+    <ImageView
+        android:id="@+id/back_button"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="25dp"
+        android:onClick="Back"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/button3"
+        tools:visibility="visible" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="0dp"
+        android:layout_height="140dp"
+        android:background="#dbcbb6"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginBottom="50dp"
+            android:onClick="toConfigure"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.5"
+            app:srcCompat="@drawable/white_circle" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="112dp"
+            android:layout_height="42dp"
+            android:layout_marginStart="4dp"
+            android:fontFamily="@font/gilda_display"
+            android:gravity="center|center_horizontal|center_vertical"
+            android:text="Email"
+            android:textStyle="bold"
+            app:autoSizeTextType="uniform"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imageView3"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.52" />
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="62dp"
+            android:layout_height="46dp"
+            android:fontFamily="sans-serif"
+            android:foregroundGravity="center_vertical|center|center_horizontal"
+            android:gravity="center|center_horizontal|center_vertical"
+            android:text="YL"
+            app:autoSizeTextType="uniform"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView3"
+            app:layout_constraintEnd_toEndOf="@+id/imageView3"
+            app:layout_constraintStart_toStartOf="@+id/imageView3"
+            app:layout_constraintTop_toTopOf="@+id/imageView3" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <Spinner
+        android:id="@+id/contact_spinner"
+        android:layout_width="365dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="12dp"
+        android:contentDescription="@string/to_description"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/to_text" />
+
+    <EditText
+        android:id="@+id/input_subject"
+        android:layout_width="365dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/rounded_textbox"
+        android:ems="10"
+        android:fontFamily="@font/gilda_display"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cc_text2" />
 
     <TextView
         android:id="@+id/to_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="56dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/gilda_display"
         android:text="@string/to_text"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
+
+    <EditText
+        android:id="@+id/input_body"
+        android:layout_width="365dp"
+        android:layout_height="250dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/rounded_textbox_email"
+        android:ems="10"
+        android:fontFamily="@font/gilda_display"
+        android:gravity="top|left"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cc_text3" />
 
     <Spinner
-        android:id="@+id/contact_spinner"
-        android:layout_width="377dp"
-        android:layout_height="55dp"
-        android:layout_marginTop="44dp"
+        android:id="@+id/cc_spinner"
+        android:layout_width="365dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="12dp"
+        android:contentDescription="@string/cc_description"
         app:layout_constraintEnd_toEndOf="parent"
-        android:contentDescription="@string/to_description"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cc_text" />
+
+    <Button
+        android:id="@+id/send_button"
+        android:layout_width="114dp"
+        android:layout_height="47dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/gilda_display"
+        android:text="@string/send_mail_text"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        app:cornerRadius="150dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.922"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/input_body" />
 
     <TextView
         android:id="@+id/cc_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/gilda_display"
         android:text="@string/cc_text"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/contact_spinner" />
 
-    <Spinner
-        android:id="@+id/cc_spinner"
-        android:layout_width="377dp"
-        android:layout_height="55dp"
-        android:layout_marginTop="12dp"
-        android:contentDescription="@string/cc_description"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/contact_spinner" />
-
-    <Button
-        android:id="@+id/back_button"
+    <TextView
+        android:id="@+id/cc_text2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="100dp"
-        android:text="@string/back"
-        android:onClick="Back"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <EditText
-        android:id="@+id/input_subject"
-        android:layout_width="404dp"
-        android:layout_height="50dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="16dp"
-        android:ems="10"
-        android:hint="@string/subject_text"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:fontFamily="@font/gilda_display"
+        android:text="@string/subject_text"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cc_spinner" />
 
-    <EditText
-        android:id="@+id/input_body"
-        android:layout_width="404dp"
-        android:layout_height="198dp"
-        android:ems="10"
-        android:hint="@string/email_body_text"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/input_subject" />
-
-    <Button
+    <ImageView
         android:id="@+id/attachment_button"
-        android:layout_width="247dp"
-        android:layout_height="51dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/add_attachment_text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/input_body" />
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="4dp"
+        app:layout_constraintEnd_toStartOf="@+id/send_button"
+        app:layout_constraintTop_toBottomOf="@+id/input_body"
+        app:srcCompat="@drawable/paper_clip_3_512__1_" />
 
-    <Button
-        android:id="@+id/send_button"
-        android:layout_width="247dp"
-        android:layout_height="51dp"
-        android:layout_marginTop="24dp"
-        android:text="@string/send_mail_text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/attachment_button" />
 </androidx.constraintlayout.widget.ConstraintLayout>

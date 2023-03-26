@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
@@ -22,7 +23,8 @@ import java.io.InputStreamReader;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button createAccountButton;
+    //Button createAccountButton;
+    TextView createAccountText;
     EditText input_username, input_password;
     String[] userInfo = new String[2];
 
@@ -31,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        createAccountButton = findViewById(R.id.to_create_account_button);
+        createAccountText = findViewById(R.id.to_create_account_button);
         input_username = findViewById(R.id.input_username);
         input_password = findViewById(R.id.input_password);
 
@@ -64,8 +66,8 @@ public class MainActivity extends AppCompatActivity {
             }//end while
 
             if(userInfo[0] != null){
-                createAccountButton.setVisibility(View.INVISIBLE);
-            }//end if
+                //createAccountButton.setVisibility(View.INVISIBLE);          //edited this out because I change createAccount
+            }//end if                                                         // into a textview. -Yuriy
 
             inputStream.close();
         }//end try
@@ -96,4 +98,6 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this,CreateAccountActivity.class);
         startActivity(intent);
     }//end toCreateAccount
+
+
 }

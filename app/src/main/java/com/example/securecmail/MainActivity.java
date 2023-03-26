@@ -66,8 +66,8 @@ public class MainActivity extends AppCompatActivity {
             }//end while
 
             if(userInfo[0] != null){
-                //createAccountButton.setVisibility(View.INVISIBLE);          //edited this out because I change createAccount
-            }//end if                                                         // into a textview. -Yuriy
+                createAccountText.setVisibility(View.INVISIBLE);
+            }//end if
 
             inputStream.close();
         }//end try

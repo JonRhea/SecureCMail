@@ -87,4 +87,10 @@ public class CreateAccountActivity extends AppCompatActivity {
         }//end else
 
     }//end createAccount
+
+
+    public void Back(View view) {
+        Intent intent = new Intent(this,MainActivity.class);
+        startActivity(intent);
+    }//end back
 }

@@ -9,6 +9,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -27,7 +28,9 @@ import jakarta.mail.MessagingException;
 public class MessageActivity extends AppCompatActivity {
 
     EditText input_subject, input_body;
-    Button send_button, attachment_button;
+    Button send_button;
+
+    ImageView attachment_button;
     Spinner to_spinner, cc_spinner;
 
     ArrayList<Contact> contactList = new ArrayList<Contact>();

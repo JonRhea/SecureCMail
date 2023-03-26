@@ -1,32 +1,33 @@
 <resources>
     <string name="app_name">SecureCMail</string>
-    <string name="securecmail_title">SecureCMail 2023</string>
+    <string name="securecmail_title">SecureCMail©2023</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="enter_your_email1">Enter Your First Email ID and Password</string>
     <string name="enter_your_email2">Enter Your Second Email ID and Password</string>
     <string name="configure_text">Configure</string>
     <string name="back">Back</string>
-    <string name="email_hint">example123@example.com</string>
-    <string name="contact_unique_name">Contact Unique Name</string>
-    <string name="enter_contacts_full_name">Enter Contacts Full Name</string>
+    <string name="email_hint">johnsmith@gmail.com</string>
+    <string name="email_hint2">johnsmith@yahoo.com</string>
+    <string name="contact_unique_name">Enter Contact\'s Unique Name</string>
+    <string name="enter_contacts_full_name">Enter Contact\'s Full Name</string>
     <string name="enter_contact_email_id1">Enter Contact\'s First Email ID</string>
     <string name="enter_contact_email_id2">Enter Contact\'s Second Email ID</string>
     <string name="save">Save</string>
-    <string name="to_text">To</string>
+    <string name="to_text">To:</string>
     <string name="to_description">Who to send the email to</string>
-    <string name="cc_text">CC</string>
+    <string name="cc_text">CC:</string>
     <string name="cc_description">Who to CC in the email</string>
     <string name="contacts_text">Contacts</string>
     <string name="message_text">Message</string>
-    <string name="subject_text">Subject</string>
-    <string name="email_body_text">Email Body</string>
+    <string name="subject_text">Subject:</string>
+    <string name="email_body_text">Body:</string>
     <string name="add_attachment_text">Add Attachment</string>
-    <string name="send_mail_text">Send Mail</string>
+    <string name="send_mail_text">Send</string>
     <string name="login_text">Login</string>
-    <string name="username_text">Username</string>
-    <string name="password_text">Password</string>
-    <string name="create_account_text">Create Account</string>
-    <string name="confirm_username_text">Confirm Username</string>
-    <string name="confirm_password_text">Confirm Password</string>
+    <string name="username_text">username</string>
+    <string name="password_text">password</string>
+    <string name="create_account_text">create account</string>
+    <string name="confirm_username_text">confirm username</string>
+    <string name="confirm_password_text">confirm password</string>
 </resources>

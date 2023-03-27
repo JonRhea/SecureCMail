@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     TextView createAccountText;
     EditText input_username, input_password;
     String[] userInfo = new String[2];
+    boolean first = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
             }//end while
 
             if(userInfo[0] != null){
+                first = true;
                 createAccountText.setVisibility(View.INVISIBLE);
             }//end if
 
@@ -95,8 +97,10 @@ public class MainActivity extends AppCompatActivity {
     }//end toHome
 
     public void toCreateAccount(View view) {
-        Intent intent = new Intent(this,CreateAccountActivity.class);
-        startActivity(intent);
+        if(first == false) {
+            Intent intent = new Intent(this, CreateAccountActivity.class);
+            startActivity(intent);
+        }//end if
     }//end toCreateAccount
 
 

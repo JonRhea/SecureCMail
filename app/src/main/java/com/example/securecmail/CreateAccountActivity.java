@@ -82,7 +82,8 @@ public class CreateAccountActivity extends AppCompatActivity {
                 System.out.printf("Error: IOException Thrown");
             }//end catch
 
-            Intent intent = new Intent(this,MainActivity.class);
+            //send the user to enter their email IDs and password on account creation
+            Intent intent = new Intent(this,ConfigureEmailActivity.class);
             startActivity(intent);
         }//end else
 

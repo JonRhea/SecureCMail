@@ -13,6 +13,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -32,10 +33,11 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
     private OnRowListener onRowListener;
     MailHelper mailHelper = new MailHelper();
 
-    public RecyclerAdapter(Context c, OnRowListener onRowListener) {
+    public RecyclerAdapter(Context c, String[] userInfo,OnRowListener onRowListener) {
         this.c = c;
+
         try {
-            MailHelper.receiveMessages receive = mailHelper.new receiveMessages("imap.gmail.com", "", "");
+            MailHelper.receiveMessages receive = mailHelper.new receiveMessages("imap.gmail.com", "indianarhea@gmail.com", "wpuybfjeiixavpyq");
             messages = receive.execute().get();
         } catch (InterruptedException | ExecutionException e) {
             throw new RuntimeException(e);

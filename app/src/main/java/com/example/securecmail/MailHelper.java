@@ -118,7 +118,8 @@ public class MailHelper {
 
                 boolean sessionDebug = true;
                 String to = to_contact.getFirstEmailID();
-                String from = ""; //user's email ids will go here
+                System.out.println(user);
+                String from = user; //user's email ids will go here
                 String subject = msg_subject;
                 String messageText = msg_body;
 

@@ -32,7 +32,7 @@ public class HomeActivity extends AppCompatActivity {
                 filePath.mkdir();
             }//end if
 
-            InputStream inputStream = this.openFileInput("user_info.txt");
+            InputStream inputStream = this.openFileInput("user_email.txt");
             InputStreamReader inputReader = new InputStreamReader(inputStream);
             BufferedReader bufferedReader = new BufferedReader(inputReader);
 

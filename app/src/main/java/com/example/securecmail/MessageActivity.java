@@ -32,6 +32,7 @@ public class MessageActivity extends AppCompatActivity {
 
     ImageView attachment_button;
     Spinner to_spinner, cc_spinner;
+    String[] userInfo = new String[4];
 
     ArrayList<Contact> contactList = new ArrayList<Contact>();
     ArrayList<String> contactNames = new ArrayList<String>();
@@ -50,6 +51,25 @@ public class MessageActivity extends AppCompatActivity {
         to_spinner = findViewById(R.id.contact_spinner);
         cc_spinner = findViewById(R.id.cc_spinner);
 
+        try{
+            File filePath = new File(MessageActivity.this.getFilesDir(), "securecmail_data");
+            if (!filePath.exists()) {
+                filePath.mkdir();
+            }//end if
+
+            InputStream inputStream = this.openFileInput("user_email.txt");
+            InputStreamReader inputReader = new InputStreamReader(inputStream);
+            BufferedReader bufferedReader = new BufferedReader(inputReader);
+
+            String data;
+
+            data = bufferedReader.readLine();
+            userInfo = data.split(",");
+        }//end try
+        catch (IOException e) {
+            System.out.println("Error: IOException MessageActivity");
+        }//end catch
+
         contactList.add(emptyContact);
         contactNames.add("None");
         loadContacts();
@@ -58,6 +78,7 @@ public class MessageActivity extends AppCompatActivity {
 
         to_spinner.setAdapter(contactAdapter);
         to_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
+
 
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -127,14 +148,15 @@ public class MessageActivity extends AppCompatActivity {
             }//end onNothingSelected
         });
 
+
         send_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String msg_subject = input_subject.getText().toString();
                 String msg_body = input_body.getText().toString();
                 MailHelper mailHelper = new MailHelper();
-                String user = "";
-                String pass = "";
+                String user = userInfo[0];
+                String pass = userInfo[1];
                 String host = "smtp.gmail.com";
                 if(to_contact != null) {
                     mailHelper.sendMail(host, user, pass, msg_subject, msg_body, to_contact);
@@ -160,7 +182,7 @@ public class MessageActivity extends AppCompatActivity {
                 }
             }
         });
-    }
+    }//end onCreate
 
     public void loadContacts(){
 

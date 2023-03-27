@@ -37,7 +37,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
         this.c = c;
 
         try {
-            MailHelper.receiveMessages receive = mailHelper.new receiveMessages("imap.gmail.com", "indianarhea@gmail.com", "wpuybfjeiixavpyq");
+            MailHelper.receiveMessages receive = mailHelper.new receiveMessages("imap.gmail.com", userInfo[0], userInfo[1]);
             messages = receive.execute().get();
         } catch (InterruptedException | ExecutionException e) {
             throw new RuntimeException(e);

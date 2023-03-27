@@ -56,8 +56,6 @@ public class MailHelper {
                     Message[] messages = inbox.getMessages();
                     for (int i = 1; i < 11; i++) {
                         Log.d("Email Number " + i, messages[messages.length-i].getSubject());//outputs "i" most recent emails from inbox
-                        //get all messages with SecureCMail Header -- SecureCMail and maybe a timestamp in subject, some confirmation in body before share 1?
-                        //keep user info stored persistently, keep user email accounts info in encrypted shared prefs?
                     }
                 }catch(Exception e){
                     e.printStackTrace();

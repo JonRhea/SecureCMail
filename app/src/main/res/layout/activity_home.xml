@@ -14,6 +14,7 @@
         android:background="#dbcbb6"
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -132,15 +133,30 @@
 
     <ImageView
         android:id="@+id/message_button"
+        android:translationZ="90dp"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:layout_marginEnd="25dp"
-        android:layout_marginBottom="30dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
         android:onClick="toMessage"
         android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/relativeLayout"
         app:srcCompat="@drawable/icons8_plus_500__2_"
+        tools:ignore="MissingConstraints"
         tools:visibility="visible" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/relativeLayout"
+        app:layout_constraintHorizontal_bias="1.0"
+        android:layout_height="wrap_content"
+        tools:ignore="MissingConstraints">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

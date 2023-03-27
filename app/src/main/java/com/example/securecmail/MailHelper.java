@@ -1,5 +1,6 @@
 package com.example.securecmail;
 
+import android.os.AsyncTask;
 import android.util.Log;
 
 import java.net.Inet4Address;
@@ -12,6 +13,7 @@ import jakarta.mail.Authenticator;
 import jakarta.mail.Folder;
 import jakarta.mail.Message;
 import jakarta.mail.MessagingException;
+import jakarta.mail.NoSuchProviderException;
 import jakarta.mail.PasswordAuthentication;
 import jakarta.mail.Session;
 import jakarta.mail.Store;
@@ -20,15 +22,15 @@ import jakarta.mail.internet.InternetAddress;
 import jakarta.mail.internet.MimeMessage;
 
 public class MailHelper {
-
     public void receiveMail(String hostInput, String user, String pass) throws MessagingException {
+
         new Thread(){
             public void run() {
 
                 String host = resolveHostToIPV4(hostInput);
 
                 Properties props = System.getProperties();
-                props.put("mail.debug", "true");
+                //props.put("mail.debug", "true");
                 props.put("mail.imap.host", host);
                 props.put("mail.imap.ssl.enable", "true");
                 props.put("mail.imap.port", "993");
@@ -50,6 +52,7 @@ public class MailHelper {
                     store.connect(host, user, pass);
                     Folder inbox = store.getFolder("Inbox");
                     inbox.open(Folder.READ_WRITE);
+                    Log.d("MailHelper Receive", "Inside receive method...");
                     Message[] messages = inbox.getMessages();
                     for (int i = 1; i < 11; i++) {
                         Log.d("Email Number " + i, messages[messages.length-i].getSubject());//outputs "i" most recent emails from inbox
@@ -61,6 +64,52 @@ public class MailHelper {
                 }
             }//thread bracket
         }.start();
+    }
+
+    class receiveMessages extends AsyncTask<String,Void,Message[]>{
+        String hostInput, user, pass;
+
+        receiveMessages(String hostInput, String user, String pass){
+            this.hostInput = hostInput;
+            this.user = user;
+            this.pass = pass;
+        }
+
+        @Override
+        protected Message[] doInBackground(String... strings) {
+            String host = resolveHostToIPV4(hostInput);
+
+            Properties props = System.getProperties();
+            //props.put("mail.debug", "true");
+            props.put("mail.imap.host", host);
+            props.put("mail.imap.ssl.enable", "true");
+            props.put("mail.imap.port", "993");
+            props.put("mail.imap.auth", "true");
+            props.put("mail.imap.ssl.checkserveridentity", "false");
+            props.put("mail.imap.ssl.trust", "*");
+
+            Authenticator auth = new Authenticator() {
+                @Override
+                protected PasswordAuthentication getPasswordAuthentication() {
+                    return new PasswordAuthentication(user, pass);
+                }
+            };
+
+            try {
+                Session imapSession = Session.getInstance(props, auth);
+                imapSession.setDebug(true);
+                Store store = imapSession.getStore("imap");
+                store.connect(host, user, pass);
+                Folder inbox = store.getFolder("Inbox");
+                inbox.open(Folder.READ_WRITE);
+                Log.d("MailHelper Receive", "Inside receive method...");
+                Message[] messages = inbox.getMessages();
+                return messages;
+            } catch (MessagingException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
     }
 
     public void sendMail(String hostInput, String user, String pass, String msg_subject, String msg_body, Contact to_contact){
@@ -118,7 +167,7 @@ public class MailHelper {
         InetAddress hostINets[] = null;
         String hostIPV4 = null;
         try {
-            hostINets = InetAddress.getAllByName("smtp.gmail.com");
+            hostINets = InetAddress.getAllByName(host);
             System.out.println("Host inet is: "+hostINets);
             for(int i =0;i<hostINets.length;i++){
                 if(hostINets[i] instanceof Inet4Address){

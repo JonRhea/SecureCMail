@@ -10,9 +10,9 @@ public class SecretHelper {
 
         Random rng = new Random();
 
-        int randomNumber = rng.nextInt(99);
-        String firstSet = randomNumber + ":";
-        String secondSet = randomNumber + ":";
+        int randomNumber = rng.nextInt(127);
+        String firstSet = randomNumber + ":1";
+        String secondSet = randomNumber + ":2";
 
         char[] dividedMessage = message.toCharArray();
 
@@ -21,12 +21,12 @@ public class SecretHelper {
             char letter = dividedMessage[i];
             int asciiLetter = (int) letter;
 
-            Share share1 = createShare(randomNumber, 0,asciiLetter);
-            Share share2 = createShare(randomNumber, 1, asciiLetter);
+            Share share1 = createShare(randomNumber, 5, asciiLetter);
+            Share share2 = createShare(randomNumber, 6, asciiLetter);
 
 
-            firstSet += " " + share1.getInput() + "," + (share1.getOutput() + randomNumber);
-            secondSet += " " + share2.getInput()  + "," + (share2.getOutput() + randomNumber);
+            firstSet += " " + share1.getInput() + "," + (share1.getOutput());
+            secondSet += " " + share2.getInput()  + "," + (share2.getOutput());
 
         }//end for
 
@@ -73,15 +73,21 @@ public class SecretHelper {
                 String[] shareString = firstList[i].split(",");
                 String[] shareString2 = secondList[i].split(",");
                 int x1 = Integer.valueOf(shareString[0]);
-                int y1 = Integer.valueOf(shareString[1]) - randomNumber;
+                int y1 = Integer.valueOf(shareString[1]);
 
                 int x2 = Integer.valueOf(shareString2[0]);
-                int y2 = Integer.valueOf(shareString2[1]) - randomNumber;
+                int y2 = Integer.valueOf(shareString2[1]);
 
                 int firstFraction = y1 * ((0 - x2)/(x1 - x2));
                 int secondFraction = y2 * ((0 - x1)/(x2 - x1));
 
                 int secretInt = ((firstFraction + secondFraction) % 127);
+
+                //needed because modulo on negative numbers do not return it's positive equivalent
+                if (secretInt < 0) {
+                    secretInt += 127;
+                }//end if
+
                 char letter = (char) secretInt;
 
                 message += letter;

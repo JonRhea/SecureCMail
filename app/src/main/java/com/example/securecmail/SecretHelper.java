@@ -11,8 +11,9 @@ public class SecretHelper {
         Random rng = new Random();
 
         int randomNumber = rng.nextInt(127);
-        String firstSet = "SecureCMail: 1";//randomNumber + ":1";
-        String secondSet = "SecureCMail: 2";
+        String nonce = generateNonce();
+        String firstSet = "SecureCMail: 1 " + nonce;
+        String secondSet = "SecureCMail: 2 " + nonce;
 
         char[] dividedMessage = message.toCharArray();
 
@@ -64,10 +65,8 @@ public class SecretHelper {
         boolean found = false;
 
         for(int i = 0; i < firstList.length; i++){
-            if(i == 0 || i == 1){
-                //only need the number from first set
-                //String[] rngString = firstList[0].split(":");
-                //randomNumber = Integer.valueOf(rngString[0]);
+            if(i == 0 || i == 1 || i == 2){
+               //do nothing, ignore info that is not shares
             }//end if
             else{
                 String[] shareString = firstList[i].split(",");
@@ -97,4 +96,21 @@ public class SecretHelper {
         System.out.println("decode " + message);
         return message;
     }//end decode
+
+    /**
+     * Generates a random nonce used for share identification
+     * @return The random nonce
+     */
+    public static String generateNonce(){
+        String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        String nonce = "";
+        Random random = new Random();
+
+        for(int i = 0; i < 16; i++){
+            int randomInt = random.nextInt(26);
+            nonce += characters.charAt(randomInt);
+        }//end for
+
+        return nonce;
+    }//end generateNonce
 }//end class

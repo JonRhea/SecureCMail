@@ -33,6 +33,10 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
     private OnRowListener onRowListener;
     MailHelper mailHelper = new MailHelper();
 
+    Message prevMessage;
+    MimeMessage prevMime;
+    InternetAddress prevSender;
+
     public RecyclerAdapter(Context c, String[] userInfo,OnRowListener onRowListener) {
         this.c = c;
 
@@ -74,6 +78,41 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
                         holderSender[0] = senderAddress.getPersonal();
                         holderSubject[0] = message.getSubject();
                         holderBody[0] = mimeMessage.getContent().toString();
+
+                        String subject = holderSubject[0];
+                        String[] subjectSplit = subject.split(" ");
+                        if(subjectSplit[0].equals("SecureCMail:")){
+                            if(prevMessage == null) {
+                                prevSender = senderAddress;
+                                prevMessage = message;
+                                prevMime = mimeMessage;
+                            }//end if
+                            else{
+                                String[] subjects = new String[2];
+                                String[] bodies = new String[2];
+                                if(subjectSplit[1].equals("1")){
+                                    subjects[0] = message.getSubject();
+                                    subjects[1] = prevMessage.getSubject();
+
+                                    bodies[0] = mimeMessage.getContent().toString().substring(0, mimeMessage.getContent().toString().length() - 2);
+                                    bodies[1] = prevMime.getContent().toString().substring(0, prevMime.getContent().toString().length() - 2);
+
+
+                                }//end if
+                                else{
+                                    subjects[1] = message.getSubject();
+                                    subjects[0] = prevMessage.getSubject();
+
+                                    bodies[1] = mimeMessage.getContent().toString().substring(0, mimeMessage.getContent().toString().length() - 2);
+                                    bodies[0] = prevMime.getContent().toString().substring(0, prevMime.getContent().toString().length() - 2);
+                                }//end else
+                                String decodeSubject = SecretHelper.decode(subjects);
+                                String decodeBody = SecretHelper.decode(bodies);
+                                holderSubject[0] = decodeSubject;
+                                holderBody[0] = decodeBody;
+                            }//end else
+                        }//end if
+
                     } catch (MessagingException | IOException e) {
                         throw new RuntimeException(e);
                     }

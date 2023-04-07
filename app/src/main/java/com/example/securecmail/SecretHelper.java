@@ -11,8 +11,8 @@ public class SecretHelper {
         Random rng = new Random();
 
         int randomNumber = rng.nextInt(127);
-        String firstSet = randomNumber + ":1";
-        String secondSet = randomNumber + ":2";
+        String firstSet = "SecureCMail: 1";//randomNumber + ":1";
+        String secondSet = "SecureCMail: 2";
 
         char[] dividedMessage = message.toCharArray();
 
@@ -64,10 +64,10 @@ public class SecretHelper {
         boolean found = false;
 
         for(int i = 0; i < firstList.length; i++){
-            if(i == 0){
+            if(i == 0 || i == 1){
                 //only need the number from first set
-                String[] rngString = firstList[0].split(":");
-                randomNumber = Integer.valueOf(rngString[0]);
+                //String[] rngString = firstList[0].split(":");
+                //randomNumber = Integer.valueOf(rngString[0]);
             }//end if
             else{
                 String[] shareString = firstList[i].split(",");

@@ -159,12 +159,18 @@ public class MessageActivity extends AppCompatActivity {
                 String pass = userInfo[1];
                 String host = "smtp.gmail.com";
                 if(to_contact != null) {
-                    mailHelper.sendMail(host, user, pass, msg_subject, msg_body, to_contact);
-                    Toast.makeText(getApplicationContext(), "Message Sent!", Toast.LENGTH_LONG).show();
+
+
+                    String[] encodedSubject = SecretHelper.encrypt(msg_subject);
+                    String[] encodedBody = SecretHelper.encrypt(msg_body);
 
                     //temp: testing secret sharing methods
-                    //String[] encoded = SecretHelper.encrypt(msg_body);
-                    //String decoded = SecretHelper.decode(encoded);
+                    String decodedSubject = SecretHelper.decode(encodedSubject);
+                    String decodedBody = SecretHelper.decode(encodedBody);
+
+                    mailHelper.sendMail(host, user, pass, encodedSubject[0], encodedBody[0], to_contact);
+                    mailHelper.sendMail(host, user, pass, encodedSubject[1], encodedBody[1], to_contact);
+                    Toast.makeText(getApplicationContext(), "Message Sent!", Toast.LENGTH_LONG).show();
                 }//end if
                 else {
                     System.out.println("Error, no recipient selected.\n");

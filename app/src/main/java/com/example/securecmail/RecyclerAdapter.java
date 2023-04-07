@@ -31,6 +31,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
     private OnRowListener onRowListener;
     private onItemClick onItemListener;
     MailHelper mailHelper = new MailHelper();
+    boolean edited = false;
 
     ArrayList<Message> unpairedMessage = new ArrayList<>();
 
@@ -109,6 +110,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
                                     String decodeBody = SecretHelper.decode(bodies);
                                     holderSubject[0] = decodeSubject;
                                     holderBody[0] = decodeBody;
+                                    edited = true;
                                     break;//break out of for loop, we found a pair
                                 }//end if
 
@@ -126,8 +128,17 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
                     new Handler(Looper.getMainLooper()).post(new Runnable() {
                         @Override
                         public void run() {
-                            holder.sender.setText(holderSender[0]);
-                            holder.subject.setText(holderSubject[0]);
+                            if(edited){
+                                edited = false;
+                                holder.sender.setText(holderSender[0]);
+                                holder.subject.setText("SecureCMail-Decoded "+ holderSubject[0]);
+                                holder.body.setText(holderBody[0]);
+                            }
+                            else {
+                                holder.sender.setText(holderSender[0]);
+                                holder.subject.setText(holderSubject[0]);
+                                holder.body.setText(holderBody[0]);
+                            }
                             Log.d("Bind view holder", "Output for subject: " + holderSubject[0]);
                             //holder.body.setText(holderBody[0]);
                         }
@@ -148,7 +159,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
             super(itemView);
             subject = itemView.findViewById(R.id.subject);
             sender = itemView.findViewById(R.id.sender);
-            //body = itemView.findViewById(R.id.body);
+            body = itemView.findViewById(R.id.body);
+            body.setVisibility(View.INVISIBLE);
             this.onRowListener = onRowListener;
             this.onItemListener = onItemClick;
             itemView.setOnClickListener(this);
@@ -158,11 +170,21 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
         public void onClick(View view) {
             onRowListener.onRowClick(getAdapterPosition());
             getMessage message = new getMessage(getAdapterPosition());
-            try {
-                onItemListener.onClick(message.execute().get());
-            } catch (ExecutionException | InterruptedException e) {
-                throw new RuntimeException(e);
-            }
+            String text = subject.getText().toString();
+            String split[] = text.split(" ");
+            if(split[0].equals("SecureCMail-Decoded")){
+                String[] strings = new String[2];
+                strings[1] = text.substring(20, text.length());
+                strings[0] = body.getText().toString();
+                onItemListener.onClick(strings);
+            }//end if
+            else {
+                try {
+                    onItemListener.onClick(message.execute().get());
+                } catch (ExecutionException | InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }//end else
         }
     }
 

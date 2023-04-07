@@ -1,7 +1,7 @@
 package com.example.securecmail;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
+import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
@@ -13,10 +13,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.concurrent.ExecutionException;
 
 import jakarta.mail.Message;
@@ -31,11 +29,12 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
     private Message[] messages;
     private Context c;
     private OnRowListener onRowListener;
+    private onItemClick onItemListener;
     MailHelper mailHelper = new MailHelper();
 
     ArrayList<Message> unpairedMessage = new ArrayList<>();
 
-    public RecyclerAdapter(Context c, String[] userInfo,OnRowListener onRowListener) {
+    public RecyclerAdapter(Context c, String[] userInfo, OnRowListener onRowListener, onItemClick onItemClick) {
         this.c = c;
 
         try {
@@ -45,6 +44,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
             throw new RuntimeException(e);
         }
         this.onRowListener = onRowListener;
+        this.onItemListener = onItemClick;
     }
 
     @NonNull
@@ -52,7 +52,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(c);
         View v = inflater.inflate(R.layout.inbox_row, parent, false);
-        return new MyViewHolder(v, onRowListener);
+        return new MyViewHolder(v, onRowListener, onItemListener);
     }
 
     /**
@@ -76,8 +76,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
                         InternetAddress senderAddress = (InternetAddress) message.getFrom()[0];
                         holderSender[0] = senderAddress.getPersonal();
                         holderSubject[0] = message.getSubject();
-                        holderBody[0] = mimeMessage.getContent().toString();
-
+                        //holderBody[0] = mimeMessage.getContent().toString();
                         String subject = holderSubject[0];
                         String[] subjectSplit = subject.split(" ");
                         if(subjectSplit[0].equals("SecureCMail:")){
@@ -130,7 +129,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
                             holder.sender.setText(holderSender[0]);
                             holder.subject.setText(holderSubject[0]);
                             Log.d("Bind view holder", "Output for subject: " + holderSubject[0]);
-                            holder.body.setText(holderBody[0]);
+                            //holder.body.setText(holderBody[0]);
                         }
                     });
                 }
@@ -144,18 +143,26 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         TextView subject, sender, body;
         OnRowListener onRowListener;
-        public MyViewHolder(@NonNull View itemView, OnRowListener onRowListener) {
+        onItemClick onItemListener;
+        public MyViewHolder(@NonNull View itemView, OnRowListener onRowListener, onItemClick onItemClick) {
             super(itemView);
             subject = itemView.findViewById(R.id.subject);
             sender = itemView.findViewById(R.id.sender);
-            body = itemView.findViewById(R.id.body);
+            //body = itemView.findViewById(R.id.body);
             this.onRowListener = onRowListener;
+            this.onItemListener = onItemClick;
             itemView.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View view) {
             onRowListener.onRowClick(getAdapterPosition());
+            getMessage message = new getMessage(getAdapterPosition());
+            try {
+                onItemListener.onClick(message.execute().get());
+            } catch (ExecutionException | InterruptedException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 
@@ -171,5 +178,26 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
     @Override
     public int getItemViewType(int position) {
         return position;
+    }
+
+    class getMessage extends AsyncTask<Integer, Void, String[]> {
+        Integer position;
+        String subject, body;
+        getMessage(Integer position){
+            this.position = position;
+        }
+        @Override
+        protected String[] doInBackground(Integer... integers) {
+            Message message = messages[messages.length - position - 1];
+            try {
+                //body = message.getContent().toString();
+                body = mailHelper.getText(message);
+                Log.d("getMessage Task", "Body of message is: "+body);
+                subject = message.getSubject();
+            } catch (IOException | MessagingException e) {
+                throw new RuntimeException(e);
+            }
+            return new String[]{body,subject};
+        }
     }
 }

@@ -26,31 +26,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:fontFamily="@font/gilda_display"
+
                 android:text="Loading..."
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/sender"
                 app:layout_constraintTop_toBottomOf="@+id/sender" />
 
             <TextView
-                android:id="@+id/body"
-                android:background="#c7b198"
-                android:layout_width="210dp"
-                android:layout_height="70dp"
-                android:fontFamily="@font/gilda_display"
-                android:text="Loading..."
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/sender"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0" />
-
-            <TextView
                 android:id="@+id/sender"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
-                android:fontFamily="@font/gilda_display"
+
                 android:text="Loading..."
                 android:textSize="24sp"
                 app:layout_constraintTop_toTopOf="parent"

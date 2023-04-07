@@ -1,14 +1,20 @@
 package com.example.securecmail;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.webkit.WebChromeClient;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -57,6 +63,27 @@ public class HomeActivity extends AppCompatActivity {
             public void onRowClick(int position) {
                 Log.d("Inbox Activity", "Row "+position+" clicked!");
             }
+        }, new onItemClick() {
+            @Override
+            public void onClick(String[] strings) {
+
+                AlertDialog.Builder messageViewAlert = new AlertDialog.Builder(HomeActivity.this);
+                View view = LayoutInflater.from(getApplicationContext()).inflate(R.layout.alert_display_message, null);
+                WebView webview = view.findViewById(R.id.webview);
+                webview.setWebViewClient(new WebViewClient());
+                webview.getSettings().setMediaPlaybackRequiresUserGesture(false);
+                webview.setWebChromeClient(new WebChromeClient());
+                webview.loadDataWithBaseURL(null, strings[0], "text/html", "UTF-8", null);
+                messageViewAlert.setTitle(strings[1]);
+                messageViewAlert.setView(view);
+                messageViewAlert.setNegativeButton("Close", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                messageViewAlert.show();
+            }
         });
         recyclerView.setAdapter(adapter);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
@@ -72,7 +99,6 @@ public class HomeActivity extends AppCompatActivity {
     public void toConfigure(View view) {
         Intent intent = new Intent(this,ConfigureEmailActivity.class);
         startActivity(intent);
-
     }//end toConfigure
 
     /**

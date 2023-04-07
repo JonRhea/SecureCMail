@@ -43,12 +43,12 @@ public class MainActivity extends AppCompatActivity {
         //the file does not delete after creating an account for testing
         //deleting file manually in Studio works as well
 
-        /*
-        File filePathDelete = new File(MainActivity.this.getFilesDir(), "securecmail_data");
+
+        /*File filePathDelete = new File(MainActivity.this.getFilesDir(), "securecmail_data");
         if(filePathDelete.exists()){
             deleteFile("user_login.txt");
         }//end if
-        */
+         */
 
         File filePath = new File(MainActivity.this.getFilesDir(), "securecmail_data");
         if(!filePath.exists()){

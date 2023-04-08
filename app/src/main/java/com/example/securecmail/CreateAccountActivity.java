@@ -28,7 +28,6 @@ public class CreateAccountActivity extends AppCompatActivity {
         input_password = findViewById(R.id.input_password_1);
         confirm_password = findViewById(R.id.input_password_2);
 
-
     }
 
     /**
@@ -40,9 +39,6 @@ public class CreateAccountActivity extends AppCompatActivity {
         String username_confirm = confirm_username.getText().toString();
         String password = input_password.getText().toString();
         String password_confirm = confirm_password.getText().toString();
-
-
-
 
         if(!username.equals(username_confirm)){
             Toast.makeText(this, "Error: Usernames do not match.",Toast.LENGTH_LONG).show();
@@ -60,7 +56,6 @@ public class CreateAccountActivity extends AppCompatActivity {
                 if(!filePath.exists()){
                     filePath.mkdir();
                 }//end if
-
 
                 File file = new File(this.getFilesDir(), "user_login.txt");
                 FileOutputStream stream = new FileOutputStream(file, false);
@@ -89,7 +84,10 @@ public class CreateAccountActivity extends AppCompatActivity {
 
     }//end createAccount
 
-
+    /**
+     * Sends the user back to MainActivity
+     * @param view The button to go back to Main
+     */
     public void Back(View view) {
         Intent intent = new Intent(this,MainActivity.class);
         startActivity(intent);

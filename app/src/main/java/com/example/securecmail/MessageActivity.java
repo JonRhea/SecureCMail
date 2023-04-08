@@ -83,8 +83,6 @@ public class MessageActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-                //((TextView) parent.getChildAt(0)).setTextColor(Color.BLACK);
-
                 Object contactUnique = parent.getSelectedItem().toString();
 
                 if (contactUnique == "None") {
@@ -195,6 +193,9 @@ public class MessageActivity extends AppCompatActivity {
         });
     }//end onCreate
 
+    /**
+     * Load contacts from file ot be used in Spinners
+     */
     public void loadContacts(){
 
         File filePath = new File(MessageActivity.this.getFilesDir(), "securecmail_data");

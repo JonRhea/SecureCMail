@@ -34,8 +34,6 @@ public class ContactActivity extends AppCompatActivity {
     String emailId1;
     String emailId2;
 
-    //ArrayList<String> contactList = new ArrayList<String>();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,12 +46,6 @@ public class ContactActivity extends AppCompatActivity {
         contactListView = findViewById(R.id.contact_list);
 
         refreshContact();
-
-        //temporarily deleting contact_info.txt every run for testing
-        //File filePath = new File(ContactActivity.this.getFilesDir(), "securecmail_data");
-        //if(filePath.exists()){
-            //deleteFile("contact_info.txt");
-        //}//end if
 
     }
 
@@ -70,7 +62,6 @@ public class ContactActivity extends AppCompatActivity {
 
     /**
      * Save a contact's info
-     * NOT IMPLEMENTED YET
      * @param view The button to save a contact
      */
     public void saveContact(View view) {
@@ -94,7 +85,6 @@ public class ContactActivity extends AppCompatActivity {
 
                 System.out.println("New Contact was saved successfully!");
                 refreshContact();
-                //readContact();
             }//end try
             catch(FileNotFoundException e){
                 Toast.makeText(this, "Error: File Not Found",Toast.LENGTH_LONG).show();
@@ -157,11 +147,10 @@ public class ContactActivity extends AppCompatActivity {
             inputStream.close();
         }//end try
         catch(FileNotFoundException e){
-            //add toast later
             System.out.printf("Error: File Not Found");
         }//end catch
         catch (IOException e) {
-            //add toast later
+            Toast.makeText(this, "Error: IOException Thrown",Toast.LENGTH_LONG).show();
             System.out.printf("Error: IOException Thrown");
         }//end catch
     }//end readContactTest

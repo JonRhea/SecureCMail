@@ -81,7 +81,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
                         String subject = holderSubject[0];
                         String[] subjectSplit = subject.split(" ");
                         if(subjectSplit[0].equals("SecureCMail:")){
-
+                            //if split email was found, try to find its other part
                             for(int i = 0; i < unpairedMessage.toArray().length; i++){
                                 Message singleMessage = unpairedMessage.get(i);
                                 String singleSubject = singleMessage.getSubject();
@@ -92,6 +92,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
                                     String[] subjects = new String[2];
                                     String[] bodies = new String[2];
 
+                                    //need to check to see which set of shares the second part found is
                                     if(subjectSplit[1].equals("1")){
                                         subjects[0] = message.getSubject();
                                         subjects[1] = singleMessage.getSubject();
@@ -115,11 +116,10 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
                                 }//end if
 
                             }//end for
-                             if(found == false){
-                                 unpairedMessage.add(message);
-                             }//end if
-
-
+                            //if no match was found, add to list of unpaired shares
+                            if(found == false){
+                                unpairedMessage.add(message);
+                            }//end if
                         }//end if
 
                     } catch (MessagingException | IOException e) {
@@ -131,6 +131,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
                             if(edited){
                                 edited = false;
                                 holder.sender.setText(holderSender[0]);
+                                //add "SecureCMail-Decoded" to identify which emails were reconstructed
                                 holder.subject.setText("SecureCMail-Decoded "+ holderSubject[0]);
                                 holder.body.setText(holderBody[0]);
                             }
@@ -159,27 +160,36 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
             super(itemView);
             subject = itemView.findViewById(R.id.subject);
             sender = itemView.findViewById(R.id.sender);
+            //body is used to store reconstructed body, since IMAP prevents modifying emails
             body = itemView.findViewById(R.id.body);
-            body.setVisibility(View.INVISIBLE);
+            body.setVisibility(View.INVISIBLE);//hide it from users
             this.onRowListener = onRowListener;
             this.onItemListener = onItemClick;
             itemView.setOnClickListener(this);
         }
 
+        /**
+         * Gets the strings needed to pass into the alert listener to view emails
+         * @param view The email clicked in RecycleViewer
+         */
         @Override
         public void onClick(View view) {
             onRowListener.onRowClick(getAdapterPosition());
             getMessage message = new getMessage(getAdapterPosition());
             String text = subject.getText().toString();
             String split[] = text.split(" ");
+
+            //if a reconstructed method was found, pass the decoded subject and body to alert onClick
             if(split[0].equals("SecureCMail-Decoded")){
                 String[] strings = new String[2];
                 strings[1] = text.substring(20, text.length());
                 strings[0] = body.getText().toString();
+                //now call listener to construct alert
                 onItemListener.onClick(strings);
             }//end if
             else {
                 try {
+                    //now call listener to construct alert
                     onItemListener.onClick(message.execute().get());
                 } catch (ExecutionException | InterruptedException e) {
                     throw new RuntimeException(e);

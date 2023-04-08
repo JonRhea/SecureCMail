@@ -53,6 +53,10 @@ public class ConfigureEmailActivity extends AppCompatActivity {
     }
 
 
+    /**
+     * Save user email info to file
+     * @param view The save button
+     */
     public void saveUserInfo(View view) {
         String email1 = input_email1.getText().toString();
         String email2 = input_email2.getText().toString();
@@ -87,6 +91,9 @@ public class ConfigureEmailActivity extends AppCompatActivity {
 
     }//end saveUserInfo
 
+    /**
+     * Test method to see if user email info can be read from file
+     */
     public void readUserEmailTest(){
 
         String contactString = "";
@@ -119,7 +126,7 @@ public class ConfigureEmailActivity extends AppCompatActivity {
 
 
 
-        /**
+    /**
      * Sends the user back to MainActivity
      * @param view The button to go back
      */

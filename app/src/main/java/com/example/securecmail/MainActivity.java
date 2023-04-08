@@ -38,18 +38,6 @@ public class MainActivity extends AppCompatActivity {
         input_username = findViewById(R.id.input_username);
         input_password = findViewById(R.id.input_password);
 
-        //delete user login file for testing
-        //app has to run once with this uncommented, then again uncommented so that
-        //the file does not delete after creating an account for testing
-        //deleting file manually in Studio works as well
-
-
-        /*File filePathDelete = new File(MainActivity.this.getFilesDir(), "securecmail_data");
-        if(filePathDelete.exists()){
-            deleteFile("user_login.txt");
-        }//end if
-         */
-
         File filePath = new File(MainActivity.this.getFilesDir(), "securecmail_data");
         if(!filePath.exists()){
             filePath.mkdir();
@@ -82,10 +70,15 @@ public class MainActivity extends AppCompatActivity {
         }//end catch
     }
 
+    /**
+     * Sends the user to the Home Activity
+     * @param view The button to go to Home
+     */
     public void toHome(View view) {
         String username = input_username.getText().toString();
         String password = input_password.getText().toString();
 
+        //only send user to HomeActivity if they have an account
         if(username.equals(userInfo[0]) && password.equals(userInfo[1])){
             Intent intent = new Intent(this,HomeActivity.class);
             startActivity(intent);
@@ -96,6 +89,10 @@ public class MainActivity extends AppCompatActivity {
 
     }//end toHome
 
+    /**
+     * Sends the user to CreateAccount Activity
+     * @param view The button to go to CreateAccount
+     */
     public void toCreateAccount(View view) {
         if(first == false) {
             Intent intent = new Intent(this, CreateAccountActivity.class);

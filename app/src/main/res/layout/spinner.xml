@@ -5,5 +5,5 @@
     android:background="#e6dcd1"
     android:padding="10dp"
     android:spinnerMode="dialog"
-    android:textColor="#0096FF"
+    android:textColor="#000000"
     android:textSize="14sp" />

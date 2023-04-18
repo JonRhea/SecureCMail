@@ -14,7 +14,6 @@ public class SecretHelper {
 
         Random rng = new Random();
 
-        int randomNumber = rng.nextInt(127);
         String nonce = generateNonce();
         //SecureCMail is used to identify if this email was split or not
         //1 or 2 denotes which set of shares a set has, which is important for reconstructing the secret
@@ -27,6 +26,7 @@ public class SecretHelper {
 
         for(int i = 0; i < dividedMessage.length; i++){
 
+            int randomNumber = rng.nextInt(127);
             char letter = dividedMessage[i];
             int asciiLetter = (int) letter;
 

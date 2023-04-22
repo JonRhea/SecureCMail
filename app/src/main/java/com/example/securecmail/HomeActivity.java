@@ -62,6 +62,7 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onRowClick(int position) {
                 Log.d("Inbox Activity", "Row "+position+" clicked!");
+
             }
         }, new onItemClick() {
             @Override

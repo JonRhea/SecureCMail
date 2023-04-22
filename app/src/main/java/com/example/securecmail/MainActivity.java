@@ -19,6 +19,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
+import jakarta.mail.MessagingException;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -77,7 +78,6 @@ public class MainActivity extends AppCompatActivity {
     public void toHome(View view) {
         String username = input_username.getText().toString();
         String password = input_password.getText().toString();
-
         //only send user to HomeActivity if they have an account
         if(username.equals(userInfo[0]) && password.equals(userInfo[1])){
             Intent intent = new Intent(this,HomeActivity.class);

@@ -184,11 +184,11 @@ public class MessageActivity extends AppCompatActivity {
                 String user = "";
                 String pass = "";
                 String host = "imap.gmail.com";
-                try {
+                /*try {
                     mailHelper.receiveMail(host, user, pass);
                 } catch (MessagingException e) {
                     throw new RuntimeException(e);
-                }
+                }*/
             }
         });
     }//end onCreate

@@ -152,10 +152,11 @@ public class MessageActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String msg_subject = input_subject.getText().toString();
                 String msg_body = input_body.getText().toString();
-                MailHelper mailHelper = new MailHelper();
+                //MailHelper mailHelper = new MailHelper();
                 String user = userInfo[0];
                 String pass = userInfo[1];
-                String host = "smtp.gmail.com";
+                String host1 = "smtp.gmail.com";
+                String host2 = "smtp-mail.outlook.com";
                 if(to_contact != null) {
 
 
@@ -163,11 +164,11 @@ public class MessageActivity extends AppCompatActivity {
                     String[] encodedBody = SecretHelper.encrypt(msg_body);
 
                     //temp: testing secret sharing methods
-                    String decodedSubject = SecretHelper.decode(encodedSubject);
-                    String decodedBody = SecretHelper.decode(encodedBody);
+                    //String decodedSubject = SecretHelper.decode(encodedSubject);
+                    //String decodedBody = SecretHelper.decode(encodedBody);
 
-                    mailHelper.sendMail(host, user, pass, encodedSubject[0], encodedBody[0], to_contact);
-                    mailHelper.sendMail(host, user, pass, encodedSubject[1], encodedBody[1], to_contact);
+                    MailHelper.sendMail(host1, user, pass, encodedSubject[0], encodedBody[0], to_contact.getSecondEmailID());
+                    MailHelper.sendMail(host2, userInfo[2], userInfo[3], encodedSubject[1], encodedBody[1], to_contact.getFirstEmailID());
                     Toast.makeText(getApplicationContext(), "Message Sent!", Toast.LENGTH_LONG).show();
                 }//end if
                 else {

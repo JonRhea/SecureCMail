@@ -256,28 +256,35 @@ public class MailHelper {
 
     }
 
-    public void sendMail(String hostInput, String user, String pass, String msg_subject, String msg_body, Contact to_contact){
+    public static void sendMail(String hostInput, String user, String pass, String msg_subject, String msg_body, String to){
         new Thread(){
             public void run() {
 
                 String host = resolveHostToIPV4(hostInput);
 
                 boolean sessionDebug = true;
-                String to = to_contact.getFirstEmailID();
-                System.out.println(user);
+                //System.out.println(user);
                 String from = user; //user's email ids will go here
                 String subject = msg_subject;
                 String messageText = msg_body;
 
-                Properties props = System.getProperties();
+                Properties props = new Properties();
                 //props.put("mail.smtp.ehlo", "false");
                 props.put("mail.debug", "true");
                 props.put("mail.smtp.host", host);
-                props.put("mail.smtp.ssl.enable", "true");
-                props.put("mail.smtp.port", "465");
                 props.put("mail.smtp.auth", "true");
-                props.put("mail.smtp.ssl.checkserveridentity", "false"); //maybe figure out how to fix this
-                props.put("mail.smtp.ssl.trust", "*");
+                if(hostInput.equals("smtp.gmail.com")){
+                    props.put("mail.smtp.port", "465");
+                    props.put("mail.smtp.ssl.enable", "true");
+                    props.put("mail.smtp.ssl.trust", "*");
+                    props.put("mail.smtp.ssl.checkserveridentity", "false");
+                }else{
+                    props.put("mail.smtp.port", "587");
+                    props.put("mail.smtp.starttls.enable", "true");
+                    props.put("mail.smtp.ssl.trust", "*");
+                    props.put("mail.smtp.ssl.checkserveridentity", "false");
+                }
+                //maybe figure out how to fix this
 
                 Authenticator auth = new Authenticator() {
                     @Override
@@ -287,7 +294,8 @@ public class MailHelper {
                 };
 
                 try {
-                    Session mailSession = Session.getDefaultInstance(props, auth);
+                    //System.out.println("Host is: "+host+", "+"User is: "+user);
+                    Session mailSession = Session.getInstance(props, auth);
                     mailSession.setDebug(sessionDebug);
                     Message msg = new MimeMessage(mailSession);
                     msg.setFrom(new InternetAddress(from));
@@ -300,7 +308,8 @@ public class MailHelper {
                     transport.connect(host, user, pass);
                     transport.sendMessage(msg, msg.getAllRecipients());
                     transport.close();
-                    System.out.println("Message sent successfully!");
+
+                    //System.out.println("Message sent successfully!");
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }
@@ -308,7 +317,7 @@ public class MailHelper {
         }.start();
     }
 
-    public String resolveHostToIPV4(String host){
+    public static String resolveHostToIPV4(String host){
         InetAddress hostINets[] = null;
         String hostIPV4 = null;
         try {

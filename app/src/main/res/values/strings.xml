@@ -3,12 +3,12 @@
     <string name="securecmail_title">SecureCMail©2023</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="enter_your_email1">Enter Your First Email ID and Password</string>
-    <string name="enter_your_email2">Enter Your Second Email ID and Password</string>
+    <string name="enter_your_email1">Enter Your Gmail ID and App Password</string>
+    <string name="enter_your_email2">Enter Your Outlook ID and App Password</string>
     <string name="configure_text">Configure</string>
     <string name="back">Back</string>
     <string name="email_hint">johnsmith@gmail.com</string>
-    <string name="email_hint2">johnsmith@yahoo.com</string>
+    <string name="email_hint2">johnsmith@outlook.com</string>
     <string name="contact_unique_name">Enter Contact\'s Unique Name</string>
     <string name="enter_contacts_full_name">Enter Contact\'s Full Name</string>
     <string name="enter_contact_email_id1">Enter Contact\'s First Email ID</string>
@@ -30,4 +30,6 @@
     <string name="create_account_text">create account</string>
     <string name="confirm_username_text">confirm username</string>
     <string name="confirm_password_text">confirm password</string>
+    <string name="configuration_text">Configuration</string>
+    <string name="edit_text">Edit</string>
 </resources>

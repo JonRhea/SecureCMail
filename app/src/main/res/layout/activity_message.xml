@@ -78,7 +78,7 @@
             android:fontFamily="sans-serif"
             android:foregroundGravity="center_vertical|center|center_horizontal"
             android:gravity="center|center_horizontal|center_vertical"
-            android:text="YL"
+            android:text="@string/edit_text"
             app:autoSizeTextType="uniform"
             app:layout_constraintBottom_toBottomOf="@+id/imageView3"
             app:layout_constraintEnd_toEndOf="@+id/imageView3"

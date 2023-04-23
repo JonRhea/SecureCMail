@@ -155,8 +155,10 @@ public class MailHelper {
                 Log.d("MailHelper Receive", "Inside receive method...");
                 Message[] messages1 = inbox1.getMessages();
                 Message[] messages2 = inbox2.getMessages();
+
                 ArrayList<Message> unpairedMessage = new ArrayList<>();
                 List<Message> allMessages = new ArrayList<>();
+                /*
                 Runnable runnable1 = new Runnable() {
                     @Override
                     public void run() {
@@ -243,11 +245,11 @@ public class MailHelper {
                         }//end if
                         index++;
                     }
-                }
+                }*/
                 Collections.addAll(allMessages, messages1);
                 Collections.addAll(allMessages, messages2);
                 return allMessages.toArray(new Message[0]);
-            } catch (MessagingException | IOException e) {
+            } catch (MessagingException e) {
                 throw new RuntimeException(e);
             }
         }

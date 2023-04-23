@@ -73,14 +73,14 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
                     try {
                         boolean found = false;
                         Message message = messages[messages.length-holder.getLayoutPosition()-1];
-                        //MimeMessage mimeMessage = new MimeMessage((MimeMessage) message);
+                        MimeMessage mimeMessage = new MimeMessage((MimeMessage) message);
                         InternetAddress senderAddress = (InternetAddress) message.getFrom()[0];
                         holderSender[0] = senderAddress.getPersonal();
                         holderSubject[0] = message.getSubject();
-                        //holderBody[0] = mimeMessage.getContent().toString();
-                        //String subject = holderSubject[0];
-                        //String[] subjectSplit = subject.split(" ");
-                        /*if(subjectSplit[0].equals("SecureCMail:")){
+                        holderBody[0] = mimeMessage.getContent().toString();
+                        String subject = holderSubject[0];
+                        String[] subjectSplit = subject.split(" ");
+                        if(subjectSplit[0].equals("SecureCMail:")){
                             //if split email was found, try to find its other part
                             for(int i = 0; i < unpairedMessage.toArray().length; i++){
                                 Message singleMessage = unpairedMessage.get(i);
@@ -120,9 +120,9 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
                             if(found == false){
                                 unpairedMessage.add(message);
                             }//end if
-                        }//end if*/
+                        }//end if
 
-                    } catch (MessagingException e) {
+                    } catch (MessagingException | IOException e) {
                         throw new RuntimeException(e);
                     }
                     new Handler(Looper.getMainLooper()).post(new Runnable() {

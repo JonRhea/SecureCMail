@@ -87,8 +87,14 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
                                 String singleSubject = singleMessage.getSubject();
                                 String[] singleSplit = singleSubject.split(" ");
                                 if(singleSplit[2].equals(subjectSplit[2])){
-                                    unpairedMessage.remove(i);
                                     found = true;
+
+                                    if(singleSplit[1].equals(subjectSplit[1])){
+                                        //this is to prevent adding duplicate pairs to the unpaired list
+                                        break;
+                                    }//end if
+
+                                    unpairedMessage.remove(i);
                                     String[] subjects = new String[2];
                                     String[] bodies = new String[2];
 

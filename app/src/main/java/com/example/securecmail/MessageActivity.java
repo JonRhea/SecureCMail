@@ -167,8 +167,8 @@ public class MessageActivity extends AppCompatActivity {
                     //String decodedSubject = SecretHelper.decode(encodedSubject);
                     //String decodedBody = SecretHelper.decode(encodedBody);
 
-                    MailHelper.sendMail(host1, user, pass, encodedSubject[0], encodedBody[0], to_contact.getSecondEmailID());
-                    MailHelper.sendMail(host2, userInfo[2], userInfo[3], encodedSubject[1], encodedBody[1], to_contact.getFirstEmailID());
+                    MailHelper.sendMail(host1, user, pass, encodedSubject[0], encodedBody[0], to_contact.getFirstEmailID());
+                    MailHelper.sendMail(host2, userInfo[2], userInfo[3], encodedSubject[1], encodedBody[1], to_contact.getSecondEmailID());
                     Toast.makeText(getApplicationContext(), "Message Sent!", Toast.LENGTH_LONG).show();
                 }//end if
                 else {

@@ -30,9 +30,11 @@ public class SecretHelper {
             char letter = dividedMessage[i];
             int asciiLetter = (int) letter;
 
+            int randomInput = rng.nextInt(120);
+
             //create shares
-            Share share1 = createShare(randomNumber, 5, asciiLetter);
-            Share share2 = createShare(randomNumber, 6, asciiLetter);
+            Share share1 = createShare(randomNumber, randomInput, asciiLetter);
+            Share share2 = createShare(randomNumber, randomInput + 1, asciiLetter);
 
             //add shares to string
             firstSet += " " + share1.getInput() + "," + (share1.getOutput());
